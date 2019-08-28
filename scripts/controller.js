@@ -2,12 +2,19 @@
 
 // basic functionalities
 $(document).ready(function () {
+  var topic1= $("input[name='topic']").val();
+  $("#btn-disconnect").click(function () {
+    client.end();
+    alert("session ended");
+    $("#status").val("Disconnected !");
+    location.reload();
+  })
   $("#btn-connect").click(function () {
 
     client = mqtt.connect($("#address").val())
    
     client.on("connect", function () {
-      $("#status").val("connected");
+      $("#status").val("Connected !");
       console.log("successfully connected");
     })
     subs=false;
@@ -27,22 +34,28 @@ $(document).ready(function () {
       var row = "<tr><td>"+ topic +"</td><td>"+moment().format('MMMM Do YYYY, h:mm:ss a')+ "</td></tr>";
       $("#tbsubscribe").append(row);
       $("#btn-publish").click(function(){
-        var topic1= $("input[name='topic']").val();
         var payload = $("input[name='payload']").val();
         if(topic==topic1){
           var row = "<tr><td>"+ topic +"</td><td>"+ payload+"</td><td>"+moment().format('MMMM Do YYYY, h:mm:ss a')+ "</td></tr>";
           $("#tbbroker").append(row);
         }
         
-      })
-
-      client.subscribe("mqtt/"+topic)
+      });
+      topic1 =  $("input[name='topic']").val();
+      
+      client.subscribe(topic)
       client.on("message", function (topic, payload) {
         console.log([topic, payload].join(": "));   
       })
       
     })
-    
+    $("#btn-unsubscribe").click(function(){
+      var topic=$("input[name='topicSub']").val();
+      client.unsubscribe(topic)
+      topic1= "";
+
+    })
+
   })
 })
 
