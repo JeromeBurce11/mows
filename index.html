@@ -1,11 +1,83 @@
 <html>
+
 <head>
   <title>mows</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
+<style>
+  fieldset{
+    border:3px;
+    background-color: aquamarine;
+    padding: 5px;
+    width: 50%;
+  }
+  table,th,tr,td{
+    border-collapse: collapse;
+    color: black;
+    padding:10px;
+  }
+</style>
+
 <body>
   <h1>MQTT</h1>
   <p>My MQTT Web App</p>
+  <fieldset>
+    <center>
+      <h4>Broker</h4>
+      <label for="address">Address:</label><br>
+      <input type="text" id="address" value="ws://broker.hivemq.com:8000/mqtt"><br><br>
+      <button type="button" class="btn btn-success" id="btn-connect">Connect</button>
+      <button class="btn btn-success" id="btn-disconnect">Disconnect</button><br>
+      <label for="Status">Status:</label><br>
+      <input type="text" id="status">
+    </center>
+  </fieldset><br>
+  <table id="tbbroker">
+    <thead>
+      <th>Topic</th>
+      <th>Payload</th>
+      <th>Time</th>
+    </thead>
+    <tbody></tbody>
+  </table><br>
+  <fieldset>
+    <center>
+      <h4>Publish</h4>
+      <label for="address">Topic:</label>
+      <input type="text" class="topic" name="topic"><br><br>
+      <label for="Status">Payload:</label>
+      <input type="text" class="payload" name="payload"><br><br>
+      <button class="btn btn-success" id="btn-publish">Publish</button><br>
+    </center>
+  </fieldset>
+  <table id="tbpublish">
+    <thead>
+      <th>Topic</th>
+      <th>Payload</th>
+      <th>Time</th>
+    </thead>
+    <tbody></tbody>
+  </table><br>
+  <fieldset>
+    <center>
+      <h4>Subscribe</h4>
+      <label for="address">Topic:</label>
+      <input type="text" name="topicSub" class="topicSub"><br><br>
+      <button class="btn btn-success" id="btn-subscribe">Subscribe</button><br>
+    </center>
+  </fieldset>
+  <table id="tbsubscribe">
+    <thead>
+      <th>Topic</th>
+      <th>Time</th>
+    </thead>
+    
+  </table><br>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+  <script src="scripts/browserMqtt.js"></script>
+  <script src="scripts/controller.js"></script>
 </body>
-<script src="scripts/browserMqtt.js"></script>
-<script src="scripts/controller.js"></script>
+
 </html>
